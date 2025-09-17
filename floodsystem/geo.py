@@ -49,5 +49,14 @@ def stations_by_river(stations):
             dict_of_river_to_stations[station.river].append(station.name)
     
     return dict_of_river_to_stations
+
+#  returns a list of rivers that determines the N rivers with the greatest number of monitoring stations
+def rivers_by_station_number(stations, N):
+    list_of_rivers = []
+    for key, value in stations_by_river(stations).items():
+        list_of_rivers.append((key, len(value)))
+        
+    return sorted_by_key(list_of_rivers, 1, True)[:N]
+    
     
         
