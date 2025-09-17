@@ -12,8 +12,7 @@ def run():
     # Build list of stations
     stations = build_station_list()
 
-    # prints a list of tuples (station name, town, distance) for the 10 closest and the 10 furthest stations from 
-    # the Cambridge city centre, (52.2053, 0.1218)
+    # prints a list of tuples stations within 10km from the Cambridge city centre, (52.2053, 0.1218)
     list_of_stations = stations_within_radius(stations, (52.2053, 0.1218), 10)
     print("stations within 10km from Cambridge city centre:{}".format(list_of_stations))
 
