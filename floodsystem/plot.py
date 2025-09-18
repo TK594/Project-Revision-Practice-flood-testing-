@@ -26,10 +26,7 @@ def plot_water_level_with_fit(station, dates, levels, p):
 
     """Plot water levels and a polynomial fit for a station over time."""
     # Plot original data points
-    plt.plot(x, y, '-')
-
-    # Plot original data points
-    plt.plot(matplotlib.dates.date2num(dates), levels, '.')
+    plt.plot(x, y, '.')
 
     # Plot polynomial fit at 30 points along interval (note that polynomial is evaluated using the shift x)
     x1 = np.linspace(d0, x[-1], 30)
