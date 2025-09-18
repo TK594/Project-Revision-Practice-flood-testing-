@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
-from datetime import datetime
-from floodsystem.stationdata import build_station_list
+import matplotlib.dates
+import numpy as np 
+from floodsystem.analysis import polyfit
 
 def plot_water_levels(station, dates, levels):
     """Plot water levels for a station over time."""
@@ -18,11 +19,27 @@ def plot_water_levels(station, dates, levels):
 
     plt.show()
 
-"""t = [datetime(2016, 12, 30), datetime(2016, 12, 31), datetime(2017, 1, 1),
-     datetime(2017, 1, 2), datetime(2017, 1, 3), datetime(2017, 1, 4),
-     datetime(2017, 1, 5)]
-level = [0.2, 0.7, 0.95, 0.92, 1.02, 0.91, 0.64]
+def plot_water_level_with_fit(station, dates, levels, p):
+    x = matplotlib.dates.date2num(dates)
+    y = levels
+    poly, d0 = polyfit(dates, levels, p)
 
-stations = build_station_list()
-station = stations[0]
-plot_water_levels(station, t, level)"""
+    """Plot water levels and a polynomial fit for a station over time."""
+    # Plot original data points
+    plt.plot(x, y, '-')
+
+    # Plot original data points
+    plt.plot(matplotlib.dates.date2num(dates), levels, '.')
+
+    # Plot polynomial fit at 30 points along interval (note that polynomial is evaluated using the shift x)
+    x1 = np.linspace(d0, x[-1], 30)
+    plt.plot(x1, poly(x1 - d0))
+    
+    # Add axis labels, rotate date labels and add plot title
+    plt.xlabel('date')
+    plt.ylabel('water level (m)')
+    plt.xticks(rotation=45)
+    plt.title(station.name)
+
+    # Display plot
+    plt.show()
