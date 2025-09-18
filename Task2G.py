@@ -30,21 +30,31 @@ def run():
     
     stations_highest_by_town_sorted = dict(sorted(stations_highest_by_town.items(), key=lambda item: item[1], reverse=True))
     list_of_towns = list(stations_highest_by_town_sorted.items())
+    
    
     # Sorting results(Severe: higher than 0.8, High: 0.5-0.8, Moderate: 0.3-0.5, Low: lower than 0.3)
+    severe = []
+    high = []       
+    moderate = []
+    low = []
     for town in list_of_towns:
-        town_sorted = {'Severe': [], 'High': [], 'Moderate': [], 'Low': []}
-        
         if town[1] >= 0.8:
-            town_sorted['Severe'].append((town[0], town[1]))
+            severe.append((town[0], town[1]))
         elif town[1] >= 0.5:
-            town_sorted['High'].append((town[0], town[1]))
+            high.append((town[0], town[1]))
         elif town[1] >= 0.3:
-            town_sorted['Moderate'].append((town[0], town[1]))
+            moderate.append((town[0], town[1]))
         else:
-            town_sorted['Low'].append((town[0], town[1]))
+            low.append((town[0], town[1]))
     
-    print(town_sorted)
+    print("Severe:")
+    print(severe, "\n")
+    print("High:")
+    print(high, "\n")
+    print("Moderate:")
+    print(moderate, "\n")
+    print("Low:")
+    print(low)
 
 if __name__ == "__main__":
     print("*** Task 2D: CUED Part IA Flood Warning System ***")
